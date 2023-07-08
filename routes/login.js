@@ -13,7 +13,8 @@ const Users = require("../models/dbhelpers"); // call db functions related to us
 // Patch - More efficient - just specify what changes you want to make or add values, dont send entire object.
 
 router.get("/", (req, res, next) => {
-  res.render("login", { data: "" });
+  console.log(req.session);
+  res.render("login");
 });
 
 router.post("/", async (req, res) => {
@@ -35,10 +36,14 @@ router.post("/", async (req, res) => {
       }
       // Compare input password vs hashed password.
       if (user && bcrypt.compareSync(password, user.password)) {
-        res.render("../views/dashboard", {
+        // Set session information to allow login
+        req.session.user = {
+          id: user.id,
           username: user.username,
           email: user.email,
-        });
+        };
+        // Go to dashboard route
+        res.redirect("/dashboard");
       } else {
         res.render("../views/login", {
           error: "Incorrect password",

@@ -1,13 +1,12 @@
 var express = require("express");
 var router = express.Router();
 
-router.get("/", (req, res, next) => {
-  // console.log("HIT dashbaord route");
-  // console.log(req.body);
-  // username = req.body.username;
-  // email = req.body.email;
-  // console.log(username, email);
-  // res.render("dashboard", { username, email });
+router.get("/", (req, res) => {
+  console.log(req.session);
+  res.render("dashboard", {
+    username: req.session.user.username,
+    email: req.session.user.email,
+  });
 });
 
 module.exports = router;

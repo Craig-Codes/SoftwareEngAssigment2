@@ -1,3 +1,10 @@
 <h1>Dashboard</h1>
+
+<% if(locals.username && locals.email){ %>
 <p>Hello, <%= username %></p>
 <p><%= email %></p>
+<% } %>
+
+<form action="/settings/logout" method="POST">
+  <button>Logout</button>
+</form>

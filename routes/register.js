@@ -46,9 +46,15 @@ router.post("/", (req, res) => {
   // Add to DB
   Users.addUser({ username, email, password }) // Gets the POST info
     .then((user) => {
-      res.render("../views/dashboard", {
-        username: req.body.Username,
-        email: req.body.Email,
+      // Get the new user and update session information to allow login
+      Users.findUserByUsername(username).then((user) => {
+        req.session.user = {
+          id: user.id,
+          username: user.username,
+          email: user.email,
+        };
+        // Go to dashboard route
+        res.redirect("/dashboard");
       });
     })
     .catch((err) => {
