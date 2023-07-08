@@ -1,28 +1,28 @@
+require("dotenv").config(); // gives access to .env file
 const express = require("express");
 const cors = require("cors");
-const bodyParser = require("body-parser"); // Get submitted form data from POST requests
 
-const db = require("./config/database");
+const server = express();
+// Port 3001 is fallback if env can't be read
+const port = process.env.PORT || 3001;
 
-const app = express();
-const port = 3000;
+// parse requests of content-type - application/json
+server.use(express.json());
+// parse requests of content-type - application/x-www-form-urlencoded
+server.use(express.urlencoded({ extended: true }));
 
-//require("dotenv").config(); // allow app to read .env file
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-app.set("view engine", "ejs"); //setting view engine to ejs
+server.set("view engine", "ejs"); //setting view engine to ejs
 
 // Routes
 const loginRoute = require("./routes/login");
 const registerRoute = require("./routes/register");
 const dashboardRoute = require("./routes/dashboard");
 
-app.use("/", loginRoute);
-app.use("/login", loginRoute);
-app.use("/register", registerRoute);
-app.use("/dashboard", dashboardRoute);
+server.use("/", loginRoute);
+server.use("/login", loginRoute);
+server.use("/register", registerRoute);
+server.use("/dashboard", dashboardRoute);
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
