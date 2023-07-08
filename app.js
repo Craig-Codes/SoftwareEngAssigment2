@@ -1,7 +1,6 @@
 require("dotenv").config(); // gives access to .env file
 const express = require("express");
 const session = require("express-session"); // library for handling session cookies
-const cors = require("cors");
 
 const server = express();
 // Port 3001 is fallback if env can't be read

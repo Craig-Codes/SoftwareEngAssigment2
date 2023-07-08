@@ -24,13 +24,33 @@ router.post("/", async (req, res) => {
   console.log(username, password);
 
   // Sanitise inputs first - prevent SQL injection!!!
+  // Sanitise inputs
+  let inputs = [username, password];
+  inputs.forEach((input) => {
+    if (input.length <= 0) {
+      return res.render("../views/login", {
+        error: "All input fields required",
+      });
+    } else if (input.length < 5) {
+      return res.render("../views/login", {
+        error:
+          "All input fields must contain at least 5 characters for security",
+      });
+    } else if (input == username) {
+      if (hasSpecialChars(input)) {
+        return res.render("../views/login", {
+          error: `Selected special characters not allowed`,
+        });
+      }
+    }
+  });
 
   // Find our user
   Users.findUserByUsername(username)
     .then((user) => {
       // If no user found
       if (!user) {
-        res.render("../views/login", {
+        return res.render("../views/login", {
           error: "User not found",
         });
       }
@@ -43,18 +63,28 @@ router.post("/", async (req, res) => {
           email: user.email,
         };
         // Go to dashboard route
-        res.redirect("/dashboard");
+        return res.redirect("/dashboard");
       } else {
-        res.render("../views/login", {
+        return res.render("../views/login", {
           error: "Incorrect password",
         });
       }
     })
     .catch((err) => {
-      res.render("../views/login", {
+      return res.render("../views/login", {
         error: "Log in error",
       });
     });
 });
+
+function hasSpecialChars(str) {
+  const specialCharsSet = new Set("-#$%^&*():;");
+  for (let letter of str) {
+    if (specialCharsSet.has(letter)) {
+      return true;
+    }
+  }
+  return false;
+}
 
 module.exports = router;

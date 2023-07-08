@@ -3,7 +3,7 @@ var router = express.Router();
 
 router.get("/", (req, res) => {
   console.log(req.session);
-  res.render("dashboard", {
+  return res.render("dashboard", {
     username: req.session.user.username,
     email: req.session.user.email,
   });
