@@ -1,5 +1,9 @@
 <h1>Register</h1>
 
+<% if(locals.error){ %>
+<h2><%= error %></h2>
+<% } %>
+
 <form action="/register" method="POST">
   <input type="text" name="Username" placeholder="Username" />
   <input type="email" name="Email" placeholder="Email address" />

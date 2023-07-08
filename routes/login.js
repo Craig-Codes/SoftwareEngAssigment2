@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const knex = require("knex"); // lets us write SQL querys in JavaScript
-//var bcrypt = require("bcryptjs");
+const bcrypt = require("bcryptjs");
 const Users = require("../models/dbhelpers"); // call db functions related to users table
 
 // req.body is json values sent to server, usually from a form submit - POST and PUT
@@ -18,59 +17,39 @@ router.get("/", (req, res, next) => {
 });
 
 router.post("/", async (req, res) => {
-  const postInfo = req.body;
-  //const postInfo = req.params;
-  console.log(postInfo);
-  res.status(201).json(postInfo);
-  Users.find(req.body.username).then((user) => {
-    // Check if found user
-  });
-  // Get info
+  // Lookup user
+  let username = req.body.Username;
+  let password = req.body.Password;
+  console.log(username, password);
 
-  // Validat Info
+  // Sanitise inputs first - prevent SQL injection!!!
 
-  // Query DB
-
-  // try {
-  //   console.log(req.body);
-  //   const { Username, Password } = req.body;
-  //   // Make sure there is a Username and Password in the request
-  //   if (!(Username && Password)) {
-  //     res.status(400).send("All input is required");
-  //   }
-  //   let user = [];
-  //   var sql = "SELECT * FROM Users WHERE Username = ?";
-  //   db.all(sql, Username, function (err, rows) {
-  //     if (err) {
-  //       res.status(400).json({ error: err.message });
-  //       return;
-  //     }
-  //     rows.forEach(function (row) {
-  //       user.push(row);
-  //     });
-  // var PHash = bcrypt.hashSync(Password, user[0].Salt);
-  // if (PHash === user[0].Password) {
-  //   // * CREATE JWT TOKEN
-  //   const token = jwt.sign(
-  //     { user_id: user[0].Id, username: user[0].Username },
-  //     process.env.TOKEN_KEY,
-  //     {
-  //       expiresIn: "1h", // 60s = 60 seconds - (60m = 60 minutes, 2h = 2 hours, 2d = 2 days)
-  //     }
-  //   );
-  //   user[0].Token = token;
-  //   // Add token to user db entry???
-  // } else {
-  //   return res.status(400).send("No Match");
-  // }
-  //res.locals.user = user[0].Username;
-  //console.log("local user is", res.locals.user);
-  //res.redirect("/dashboard");
-  //     });
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // });
+  // Find our user
+  Users.findUserByUsername(username)
+    .then((user) => {
+      // If no user found
+      if (!user) {
+        res.render("../views/login", {
+          error: "User not found",
+        });
+      }
+      // Compare input password vs hashed password.
+      if (user && bcrypt.compareSync(password, user.password)) {
+        res.render("../views/dashboard", {
+          username: user.username,
+          email: user.email,
+        });
+      } else {
+        res.render("../views/login", {
+          error: "Incorrect password",
+        });
+      }
+    })
+    .catch((err) => {
+      res.render("../views/login", {
+        error: "Log in error",
+      });
+    });
 });
 
 module.exports = router;

@@ -1,5 +1,6 @@
 require("dotenv").config(); // gives access to .env file
 const express = require("express");
+const session = require("express-session"); // library for handling session cookies
 const cors = require("cors");
 
 const server = express();
@@ -10,6 +11,14 @@ const port = process.env.PORT || 3001;
 server.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 server.use(express.urlencoded({ extended: true }));
+
+// setup session cookies
+sessionConfig = {
+  name: "coursework2cookie",
+  secret: process.env.SECRET,
+};
+
+server.use(session(sessionConfig));
 
 server.set("view engine", "ejs"); //setting view engine to ejs
 

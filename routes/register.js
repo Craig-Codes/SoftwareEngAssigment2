@@ -1,9 +1,9 @@
 var express = require("express");
 var router = express.Router();
 const Users = require("../models/dbhelpers"); // call db functions related to users table
+const bcrypt = require("bcryptjs");
 
 function loginRoute() {
-  console.log("route cahnge");
   res.redirect("/login");
 }
 
@@ -12,18 +12,49 @@ router.get("/", (req, res, next) => {
 });
 
 router.post("/", (req, res) => {
-  // Santise inputs first!!!!!
-  console.log("request body: ", req.body);
+  // Get Inputs from POST
+  const user = req.body;
+  // Individually sanitise inputs
+  let username = req.body.Username;
+  let email = req.body.Email;
+  let password = req.body.Password;
 
-  Users.add(req.body) // Gets the POST info
+  console.log("username", username);
+  console.log("email", email);
+  console.log("password", password);
+
+  // Check we have all input
+  if (!username) {
+    return res.render("../views/register", {
+      error: "Username required",
+    });
+  }
+  if (!email) {
+    return res.render("../views/register", {
+      error: "Email Address required",
+    });
+  }
+  if (!password) {
+    return res.render("../views/register", {
+      error: "Password Address required",
+    });
+  }
+
+  // Sanitise inputs
+  password = bcrypt.hashSync(password, 12); // 12 hash rounds. Created value will always be unique, even for same password
+
+  // Add to DB
+  Users.addUser({ username, email, password }) // Gets the POST info
     .then((user) => {
-      res.status(200).json(user);
-      console.log(user);
+      res.render("../views/dashboard", {
+        username: req.body.Username,
+        email: req.body.Email,
+      });
     })
     .catch((err) => {
       // ACTUALLY want to redirect back to register page with flash message
-      res.status(500).json({
-        message: "Can't add user ... username or email is not unique!",
+      res.render("../views/register", {
+        error: "Username and email address must both be unique",
       });
     });
 });

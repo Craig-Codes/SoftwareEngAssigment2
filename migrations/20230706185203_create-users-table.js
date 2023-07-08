@@ -9,6 +9,8 @@
 // Delete the appDatabase.sqlite3 file from /data
 // npx knex migrate:latest
 
+// Lesson 19 for creating new tables: knex create xxx
+
 exports.up = function (knex) {
   // Add debug() to see what SQL this gets turned into!
   return knex.schema.debug().createTable("users", (table) => {
