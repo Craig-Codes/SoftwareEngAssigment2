@@ -1,12 +1,7 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
+const { dashboardNavigatorController } = require("../controllers/dashboard");
 
-router.get("/", (req, res) => {
-  console.log(req.session);
-  return res.render("dashboard", {
-    username: req.session.user.username,
-    email: req.session.user.email,
-  });
-});
+router.get("/", dashboardNavigatorController);
 
 module.exports = router;

@@ -16,14 +16,14 @@ module.exports = {
 
 // Insert a record
 async function addUser(user) {
-  return await db("users").insert(user, ["id", "username", "email"]);
+  return await db("test-users").insert(user, ["id", "username", "email"]);
 }
 
 function findAllUsers() {
-  return db("users");
+  return db("test-users");
 }
 
 // Find a user
 function findUserByUsername(username) {
-  return db("users").where({ username: username }).first();
+  return db("test-users").where({ username: username }).first();
 }
