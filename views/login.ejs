@@ -2,6 +2,8 @@
 
 <% if(locals.error){ %>
 <h2><%= error %></h2>
+<% } %> <% if(locals.success){ %>
+<h2><%= success %></h2>
 <% } %>
 
 <form action="/login" method="POST">

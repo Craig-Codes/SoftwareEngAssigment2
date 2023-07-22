@@ -1,8 +1,3 @@
-// test that register route renders
-
-const Users = require("../../models/dbhelpers"); // call db functions related to users table
-const bcrypt = require("bcryptjs");
-
 const {
   registerNavigationController,
   registerPostController,
@@ -32,13 +27,55 @@ test("special characters not found", () => {
 });
 
 // test post route no password entered
-test("login finds user and renders dashboard", async () => {
+test("Register POST request with missing password field", async () => {
   // stubs
   const req = {
     body: {
       Username: "testUsername",
       Email: "test@Test.com",
       Password: "",
+    },
+  };
+
+  const res = {
+    render: jest.fn(),
+  };
+
+  await registerPostController(req, res);
+  expect(res.render).toHaveBeenCalledWith("../views/register", {
+    error: "All input fields required",
+  });
+});
+
+// test post route no Username entered
+test("Register POST request with missing username field", async () => {
+  // stubs
+  const req = {
+    body: {
+      Username: "",
+      Email: "test@Test.com",
+      Password: "testPassword",
+    },
+  };
+
+  const res = {
+    render: jest.fn(),
+  };
+
+  await registerPostController(req, res);
+  expect(res.render).toHaveBeenCalledWith("../views/register", {
+    error: "All input fields required",
+  });
+});
+
+// test post route no Email entered
+test("Register POST request with missing email field", async () => {
+  // stubs
+  const req = {
+    body: {
+      Username: "testUser",
+      Email: "",
+      Password: "testPassword",
     },
   };
 

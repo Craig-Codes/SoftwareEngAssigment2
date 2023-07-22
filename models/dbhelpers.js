@@ -10,20 +10,28 @@ module.exports = {
   addUser,
   findAllUsers,
   findUserByUsername,
+  updatePassword,
 };
 
 // Each function needs to be async as takes time. Await result. Need promise to complete first.
 
 // Insert a record
 async function addUser(user) {
-  return await db("test-users").insert(user, ["id", "username", "email"]);
+  return await db("users").insert(user, ["id", "username", "email"]);
 }
 
 function findAllUsers() {
-  return db("test-users");
+  return db("users");
 }
 
 // Find a user
 function findUserByUsername(username) {
-  return db("test-users").where({ username: username }).first();
+  return db("users").where({ username: username }).first();
+}
+
+// Update a users password
+function updatePassword(username, newPassword) {
+  return db("users")
+    .where({ username: username })
+    .update({ password: newPassword });
 }

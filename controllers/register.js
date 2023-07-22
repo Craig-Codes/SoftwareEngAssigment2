@@ -58,7 +58,7 @@ function registerPostController(req, res) {
     .catch((err) => {
       // ACTUALLY want to redirect back to register page with flash message
       return res.render("../views/register", {
-        error: "Error, please try again",
+        error: "Error, username and email address must be unique",
       });
     });
 }

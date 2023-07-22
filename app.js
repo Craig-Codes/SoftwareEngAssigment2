@@ -35,7 +35,7 @@ const loginRoute = require("./routes/login");
 const registerRoute = require("./routes/register");
 const dashboardRoute = require("./routes/dashboard");
 const restricted = require("./middleware/restricted-middleware");
-const settingsRoute = require("./routes/userSettings");
+const settingsRoute = require("./routes/settings");
 
 server.use("/", loginRoute);
 server.use("/login", loginRoute);
