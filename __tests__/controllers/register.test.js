@@ -111,7 +111,7 @@ test("Register finds user and renders dashboard", async () => {
 });
 
 // Inputs no longer than 50 characters
-test("Inoutsis too long", async () => {
+test("Inputs too long", async () => {
   // stubs
   const req = {
     body: {
