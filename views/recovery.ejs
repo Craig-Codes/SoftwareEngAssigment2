@@ -1,0 +1,16 @@
+<h1>Account Recovery</h1>
+
+<% if(locals.error){ %>
+<h2><%= error %></h2>
+<% } %> <% if(locals.success){ %>
+<h2><%= success %></h2>
+<% } %>
+
+<form action="/recovery" method="POST">
+  <input type="email" name="Email" placeholder="Email address" />
+  <button>Recover</button>
+</form>
+
+<form action="/login" method="GET">
+  <button>Back</button>
+</form>

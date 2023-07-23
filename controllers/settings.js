@@ -9,7 +9,7 @@ function settingsNavigationController(req, res) {
 }
 
 function logoutUser(req, res) {
-  console.log(req.session);
+  // console.log(req.session);
   // if a session exists
   if (req.session) {
     req.session.destroy();
@@ -58,11 +58,10 @@ async function changePassword(req, res) {
     });
   }
 
-  console.log(req.session.username);
+  // console.log(req.session.username);
   // All inputs worked - check if user password is correct
   await Users.findUserByUsername(req.session.user.username)
     .then((user) => {
-      console.log("found user ==== ", user);
       // If no user found - should be impossible at this point
       if (!user) {
         return res.render("../views/login", {
@@ -87,7 +86,6 @@ async function changePassword(req, res) {
 
   // Encrypt password at rest
   const encrypedPassword = bcrypt.hashSync(newPassword, 12); // encrypt with bcrypt
-  console.log(encrypedPassword);
 
   // replace password in db - redirect, password successfully updated
   await Users.updatePassword(req.session.user.username, encrypedPassword)

@@ -11,6 +11,8 @@ module.exports = {
   findAllUsers,
   findUserByUsername,
   updatePassword,
+  findEmail,
+  updatePasswordFromEmail,
 };
 
 // Each function needs to be async as takes time. Await result. Need promise to complete first.
@@ -34,4 +36,13 @@ function updatePassword(username, newPassword) {
   return db("users")
     .where({ username: username })
     .update({ password: newPassword });
+}
+
+// Find if email address exists in db
+function findEmail(email) {
+  return db("users").where({ email: email }).first();
+}
+
+function updatePasswordFromEmail(email, password) {
+  return db("users").where({ email: email }).update({ password: password });
 }

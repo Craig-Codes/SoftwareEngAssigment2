@@ -38,11 +38,11 @@ test("login finds user and renders dashboard", async () => {
 
   // mock successful return of users
   const mock = jest.spyOn(Users, "findUserByUsername"); // spy on Users.findUserByUsername()
-  mock.mockImplementation(() => {
+  await mock.mockImplementation(() => {
     return Promise.resolve({
       username: "testUser",
       password: "testPassword",
-    });
+    }).catch();
   });
 
   // mock successful return of password match
