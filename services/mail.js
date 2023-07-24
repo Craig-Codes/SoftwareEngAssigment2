@@ -416,7 +416,13 @@ async function sendMail(address, password) {
     </html>`,
   };
 
-  mailTransporter.sendMail(details);
+  mailTransporter.sendMail(details, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("email sent");
+    }
+  });
 }
 
 module.exports = {
