@@ -1,6 +1,8 @@
 require("dotenv").config(); // gives access to .env file
 const express = require("express");
 const session = require("express-session"); // library for handling session cookies
+const path = require("path");
+const sassMiddleware = require("node-sass-middleware");
 
 const server = express();
 // Port 3001 is fallback if env can't be read
@@ -10,6 +12,17 @@ const port = process.env.PORT || 3001;
 server.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 server.use(express.urlencoded({ extended: true }));
+// Use Bootstrap css framework - first setup custom sass
+server.use(
+  sassMiddleware({
+    src: path.join(__dirname, "bootstrap"),
+    dest: path.join(__dirname, "public"),
+    indentedSyntax: true,
+    sourceMap: true,
+  })
+);
+// Use bootstrap
+server.use(express.static(path.join(__dirname, "public")));
 
 // setup session cookies
 sessionConfig = {
@@ -37,6 +50,8 @@ const dashboardRoute = require("./routes/dashboard");
 const restricted = require("./middleware/restricted-middleware");
 const settingsRoute = require("./routes/settings");
 const recoveryRoute = require("./routes/recovery");
+const eventsRoute = require("./routes/events");
+const tasksRoute = require("./routes/tasks");
 
 server.use("/", loginRoute);
 server.use("/login", loginRoute);
@@ -44,6 +59,8 @@ server.use("/register", registerRoute);
 server.use("/recovery", recoveryRoute);
 server.use("/dashboard", restricted, dashboardRoute);
 server.use("/settings", restricted, settingsRoute);
+server.use("/events", restricted, eventsRoute);
+server.use("/tasks", restricted, tasksRoute);
 
 server.listen(port, () => {
   console.log(`Server listening on port ${port}`);
