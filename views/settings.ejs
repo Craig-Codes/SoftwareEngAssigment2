@@ -26,7 +26,8 @@
   </head>
 
   <body>
-    <%- include('./partials/title.ejs', {data: 'Settings'}) %>
+    <%- include('./partials/title.ejs', {data: `${locals.username}'s Settings`})
+    %>
     <h1>Settings</h1>
 
     <% if(locals.username && locals.email){ %>
