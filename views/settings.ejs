@@ -12,8 +12,10 @@
     <link rel="stylesheet" href="/style.css" />
 
     <!-- remember to include custom fonts - if you are using them -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
       rel="stylesheet"
     />
     <link
@@ -35,13 +37,9 @@
     <p><%= email %></p>
     <% } %>
 
-    <i class="fas fa-bolt fa-3x text-primary"></i>
-    <i class="fas fa-bomb fa-3x"></i>
-    <i class="fa fa-pencil"></i>
-
     <i class="far fa-save"></i>
-    <form action="/settings" method="GET">
-      <button>Settings</button>
+    <form action="/settings/logout" method="POST">
+      <button>Logout</button>
     </form>
 
     <%- include('./partials/nav.ejs') %>
