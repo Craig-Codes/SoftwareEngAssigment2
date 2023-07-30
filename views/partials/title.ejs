@@ -1,16 +1,25 @@
-<nav class="navbar navbar-dark bg-primary bg-light" id="nav-border-bottom">
+<nav
+  class="navbar fixed-top navbar-dark bg-primary bg-light"
+  id="nav-border-bottom"
+>
   <div class="container-fluid fs-5 custom-font">
     <a class="navbar-brand" id="custom-padding"><%= data %></a>
     <div class="nav-padding">
       <% if(settings == 'true'){ %>
-      <a href="settings" id="remove-link" class="stretched-link flex-d">
+      <a href="./settings" id="remove-link" class="stretched-link flex-d">
         <span><i class="fa-solid fa-user-gear"></i></span>
       </a>
       <% } %> <% if(settings != 'true'){ %>
-      <a href="dashboard" id="remove-link" class="stretched-link flex-d">
+      <a href="#" id="remove-link" class="stretched-link flex-d">
         <span><i class="fa-solid fa-chevron-left fa-lg"></i></span>
       </a>
       <% } %>
     </div>
   </div>
 </nav>
+
+<script>
+  document.getElementById("remove-link").addEventListener("click", () => {
+    history.back();
+  });
+</script>

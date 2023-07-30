@@ -36,24 +36,36 @@ async function changePassword(req, res) {
 
   let retreivedPassword; // returned password from db
 
-  // Sanitise inputs first
-  let inputs = [inputPassword, newPassword, passwordCheck];
-  inputs.forEach((input) => {
-    if (input.length <= 0) {
-      return res.render("../views/resetPassword", {
-        error: "All input fields required",
-      });
-    } else if (input.length < 5) {
-      return res.render("../views/resetPassword", {
-        error: "Password must be at least 5 characters long",
-      });
-    }
-  });
+  if (
+    inputPassword.length <= 0 ||
+    newPassword.length <= 0 ||
+    passwordCheck.length <= 0
+  ) {
+    return res.render("../views/resetPassword", {
+      username: req.session.user.username,
+      email: req.session.user.email,
+      error: "All input fields required",
+    });
+  }
+
+  if (
+    inputPassword.length < 5 ||
+    newPassword.length < 5 ||
+    passwordCheck.length < 5
+  ) {
+    return res.render("../views/resetPassword", {
+      username: req.session.user.username,
+      email: req.session.user.email,
+      error: "Password must be at least 5 characters long",
+    });
+  }
 
   // Compare new password inputs to ensure they are the same
   // We only want to query te database once all other checks completed - reduce latency
   if (newPassword !== passwordCheck) {
     return res.render("../views/resetPassword", {
+      username: req.session.user.username,
+      email: req.session.user.email,
       error: `New passwords do not match`,
     });
   }
@@ -80,6 +92,8 @@ async function changePassword(req, res) {
   // Compare input password vs hashed password.
   if (!bcrypt.compareSync(inputPassword, retreivedPassword)) {
     return res.render("../views/resetPassword", {
+      username: req.session.user.username,
+      email: req.session.user.email,
       error: "Current password is incorrect",
     });
   }
@@ -91,6 +105,8 @@ async function changePassword(req, res) {
   await Users.updatePassword(req.session.user.username, encrypedPassword)
     .then(() => {
       return res.render("../views/resetPassword", {
+        username: req.session.user.username,
+        email: req.session.user.email,
         success: "Password successfully updated",
       });
     })

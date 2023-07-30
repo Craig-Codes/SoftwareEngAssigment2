@@ -25,27 +25,71 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var calendarEl = document.getElementById("calendar");
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: "dayGridMonth",
+          initialDate: "2023-07-07",
+          headerToolbar: {
+            left: "prev",
+            center: "title",
+            right: "next",
+          },
+          events: [
+            {
+              title: "Tutorial",
+              start: "2023-08-01",
+              color: "#3495c4",
+            },
+            {
+              title: "John's Wedding",
+              start: "2023-08-17",
+              end: "2023-08-20",
+              color: "#3495c4",
+            },
+            {
+              title: "Mini Break",
+              start: "2023-08-22",
+              end: "2023-08-25",
+              color: "#3495c4",
+            },
+          ],
+        });
+        calendar.setOption("height", "450px");
+        calendar.render();
+      });
+    </script>
+    <style>
+      .fc-day-today {
+        background: #3494c4aa !important;
+        color: white !important;
+        border: none !important;
+      }
+
+      .fc-dom-1 {
+        background-color: blue;
+      }
+
+      .fc .fc-button-primary {
+        color: white;
+        background-color: #3495c4 !important;
+        border-color: #ffffff !important;
+      }
+    </style>
   </head>
 
   <body>
     <%- include('./partials/title.ejs', {data: `Hello, ${locals.username}`,
     settings: 'true'})%>
-
-    <h1>Dashboard</h1>
-
-    <% if(locals.username && locals.email){ %>
-    <p>Hello, <%= username %></p>
-    <p><%= email %></p>
-    <% } %>
-
-    <i class="fas fa-bolt fa-3x text-primary"></i>
-    <i class="fas fa-bomb fa-3x"></i>
-    <i class="fa fa-pencil"></i>
-
-    <i class="far fa-save"></i>
-    <form action="/settings" method="GET">
-      <button>Settings</button>
-    </form>
+    <div
+      class="container d-flex justify-content-center align-items-center full-screen"
+    >
+      <div class="outer-box-calendar container-fluid">
+        <div id="calendar"></div>
+      </div>
+    </div>
 
     <%- include('./partials/nav.ejs') %>
     <script

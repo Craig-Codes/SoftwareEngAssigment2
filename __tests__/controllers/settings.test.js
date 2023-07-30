@@ -25,6 +25,8 @@ test("Blank input current password", async () => {
 
   await changePassword(req, res);
   expect(res.render).toHaveBeenCalledWith("../views/resetPassword", {
+    username: req.session.user.username,
+    email: req.session.user.email,
     error: "All input fields required",
   });
 });
@@ -51,6 +53,8 @@ test("Blank input new password 1", async () => {
 
   await changePassword(req, res);
   expect(res.render).toHaveBeenCalledWith("../views/resetPassword", {
+    username: req.session.user.username,
+    email: req.session.user.email,
     error: "All input fields required",
   });
 });
@@ -77,6 +81,8 @@ test("Blank input new password 2", async () => {
 
   await changePassword(req, res);
   expect(res.render).toHaveBeenCalledWith("../views/resetPassword", {
+    username: req.session.user.username,
+    email: req.session.user.email,
     error: "All input fields required",
   });
 });
@@ -103,6 +109,8 @@ test("New passwords do not match", async () => {
 
   await changePassword(req, res);
   expect(res.render).toHaveBeenCalledWith("../views/resetPassword", {
+    username: req.session.user.username,
+    email: req.session.user.email,
     error: "New passwords do not match",
   });
 });
@@ -129,6 +137,8 @@ test("Short new password length", async () => {
 
   await changePassword(req, res);
   expect(res.render).toHaveBeenCalledWith("../views/resetPassword", {
+    username: req.session.user.username,
+    email: req.session.user.email,
     error: "Password must be at least 5 characters long",
   });
 });
@@ -164,6 +174,8 @@ test("Current Password does not match db entry", async () => {
 
   await changePassword(req, res);
   expect(res.render).toHaveBeenCalledWith("../views/resetPassword", {
+    username: req.session.user.username,
+    email: req.session.user.email,
     error: "Current password is incorrect",
   });
 });

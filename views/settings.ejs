@@ -30,17 +30,39 @@
   <body>
     <%- include('./partials/title.ejs', {data: `${locals.username}'s Settings`})
     %>
-    <h1>Settings</h1>
-
-    <% if(locals.username && locals.email){ %>
-    <p>Hello, <%= username %></p>
-    <p><%= email %></p>
-    <% } %>
-
-    <i class="far fa-save"></i>
-    <form action="/settings/logout" method="POST">
-      <button>Logout</button>
-    </form>
+    <div
+      class="container d-flex justify-content-center align-items-center full-screen"
+    >
+      <div class="container-lg my-5">
+        <div class="row mb-3">
+          <div class="col-md-3 col-2"></div>
+          <div class="col-md-6 col-8 d-grid">
+            <a href="/settings/password" class="btn btn-primary" role="button"
+              >Change Password</a
+            >
+          </div>
+          <div class="col-md-3 col-2"></div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-3 col-2"></div>
+          <div class="col-md-6 col-8 d-grid">
+            <a href="#" class="btn btn-primary" role="button"
+              >Update Email Address</a
+            >
+          </div>
+          <div class="col-md-3 col-2"></div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-3 col-2"></div>
+          <div class="col-md-6 col-8 d-grid">
+            <form class="d-grid" action="/settings/logout" method="POST">
+              <button class="btn btn-primary">Logout</button>
+            </form>
+          </div>
+          <div class="col-md-3 col-2"></div>
+        </div>
+      </div>
+    </div>
 
     <%- include('./partials/nav.ejs') %>
     <script
