@@ -30,21 +30,106 @@
   <body>
     <%- include('./partials/title.ejs', {data: `${locals.username}'s Events`})
     %>
-    <h1>Events</h1>
-
-    <% if(locals.username && locals.email){ %>
-    <p>Hello, <%= username %></p>
-    <p><%= email %></p>
-    <% } %>
-
-    <i class="fas fa-bolt fa-3x text-primary"></i>
-    <i class="fas fa-bomb fa-3x"></i>
-    <i class="fa fa-pencil"></i>
-
-    <i class="far fa-save"></i>
-    <form action="/settings" method="GET">
-      <button>Settings</button>
-    </form>
+    <div
+      class="container d-flex justify-content-center align-items-center full-screen"
+    >
+      <div class="container-lg my-5">
+        <div class="row mb-3">
+          <div class="col-md-2 col-1"></div>
+          <div class="col-md-8 col-10 d-grid">
+            <a href="#" class="btn btn-primary" role="button"
+              ><span><i class="fa-solid fa-plus fa-lg"></i></span> Create
+              Event</a
+            >
+          </div>
+          <div class="col-md-2 col-1"></div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-2 col-1"></div>
+          <div class="col-md-8 col-10 d-grid event-custom-padding">
+            <div class="event-container row">
+              <div class="col-4 no-padding">
+                <img
+                  class="event-image"
+                  src="https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                />
+              </div>
+              <div class="col-7 event-text-padding">
+                <h4>John's Wedding</h4>
+                <h6>17-Aug-23</h6>
+              </div>
+              <div class="col-1 no-padding event-chevron">
+                <i class="fa-solid fa-chevron-right fa-lg"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 col-1"></div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-2 col-1"></div>
+          <div class="col-md-8 col-10 d-grid event-custom-padding">
+            <div class="event-container row">
+              <div class="col-4 no-padding">
+                <img
+                  class="event-image"
+                  src="https://images.unsplash.com/photo-1527002836355-e11c5be50cf8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                />
+              </div>
+              <div class="col-7 event-text-padding">
+                <h4>Mini Break</h4>
+                <h6>22-Aug-23</h6>
+              </div>
+              <div class="col-1 no-padding event-chevron">
+                <i class="fa-solid fa-chevron-right fa-lg"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 col-1"></div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-2 col-1"></div>
+          <div class="col-md-8 col-10 d-grid event-custom-padding">
+            <div class="event-container row">
+              <div class="col-4 no-padding">
+                <img
+                  class="event-image"
+                  src="https://images.unsplash.com/photo-1534797258760-1bd2cc95a5bd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1738&q=80"
+                />
+              </div>
+              <div class="col-7 event-text-padding">
+                <h4>Family BBQ</h4>
+                <h6>2-Sept-23</h6>
+              </div>
+              <div class="col-1 no-padding event-chevron">
+                <i class="fa-solid fa-chevron-right fa-lg"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 col-1"></div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-2 col-1"></div>
+          <div class="col-md-8 col-10 d-grid event-custom-padding">
+            <div class="event-container row">
+              <div class="col-4 no-padding">
+                <img
+                  class="event-image"
+                  src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                />
+              </div>
+              <div class="col-7 event-text-padding">
+                <h4>Gaming Expo</h4>
+                <h6>23-Sept-23</h6>
+              </div>
+              <div class="col-1 no-padding event-chevron">
+                <i class="fa-solid fa-chevron-right fa-lg"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 col-1"></div>
+        </div>
+      </div>
+    </div>
 
     <%- include('./partials/nav.ejs') %>
     <script

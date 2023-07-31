@@ -29,21 +29,90 @@
 
   <body>
     <%- include('./partials/title.ejs', {data: `${locals.username}'s Tasks`}) %>
-    <h1>Tasks</h1>
-
-    <% if(locals.username && locals.email){ %>
-    <p>Hello, <%= username %></p>
-    <p><%= email %></p>
-    <% } %>
-
-    <i class="fas fa-bolt fa-3x text-primary"></i>
-    <i class="fas fa-bomb fa-3x"></i>
-    <i class="fa fa-pencil"></i>
-
-    <i class="far fa-save"></i>
-    <form action="/settings" method="GET">
-      <button>Settings</button>
-    </form>
+    <div
+      class="container d-flex justify-content-center align-items-center full-screen"
+    >
+      <div class="container-lg my-5">
+        <div class="row mb-3">
+          <div class="col-md-2 col-1"></div>
+          <div class="col-md-8 col-10 d-grid">
+            <a href="#" class="btn btn-primary" role="button"
+              ><span><i class="fa-solid fa-plus fa-lg"></i></span> Create
+              Task</a
+            >
+          </div>
+          <div class="col-md-2 col-1"></div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-2 col-1"></div>
+          <div class="col-md-8 col-10 d-grid event-custom-padding">
+            <div class="event-container row">
+              <div class="col-7 event-text-padding">
+                <h4>Shopping List</h4>
+              </div>
+              <div class="col-4 event-text-padding">
+                <h4>10%</h4>
+              </div>
+              <div class="col-1 no-padding event-chevron">
+                <i class="fa-solid fa-chevron-right fa-lg"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 col-1"></div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-2 col-1"></div>
+          <div class="col-md-8 col-10 d-grid event-custom-padding">
+            <div class="event-container row">
+              <div class="col-7 event-text-padding">
+                <h4>Family Chores</h4>
+              </div>
+              <div class="col-4 event-text-padding">
+                <h4>50%</h4>
+              </div>
+              <div class="col-1 no-padding event-chevron">
+                <i class="fa-solid fa-chevron-right fa-lg"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 col-1"></div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-2 col-1"></div>
+          <div class="col-md-8 col-10 d-grid event-custom-padding">
+            <div class="event-container row">
+              <div class="col-7 event-text-padding">
+                <h4>Wedding Planning</h4>
+              </div>
+              <div class="col-4 event-text-padding">
+                <h4>0%</h4>
+              </div>
+              <div class="col-1 no-padding event-chevron">
+                <i class="fa-solid fa-chevron-right fa-lg"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 col-1"></div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-2 col-1"></div>
+          <div class="col-md-8 col-10 d-grid event-custom-padding">
+            <div class="event-container row">
+              <div class="col-7 event-text-padding">
+                <h4>Holiday Packing</h4>
+              </div>
+              <div class="col-4 event-text-padding">
+                <h4>20%</h4>
+              </div>
+              <div class="col-1 no-padding event-chevron">
+                <i class="fa-solid fa-chevron-right fa-lg"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 col-1"></div>
+        </div>
+      </div>
+    </div>
 
     <%- include('./partials/nav.ejs') %>
     <script

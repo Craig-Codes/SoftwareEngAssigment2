@@ -9403,4 +9403,29 @@ a {
 .btn-group-verticl {
   gap: 10px; }
 
+.event-container {
+  background: white;
+  border-radius: 10px; }
+
+.event-custom-padding {
+  padding-left: 21px;
+  padding-right: 21px; }
+
+.event-image {
+  width: 100%;
+  height: 100%;
+  padding: 0px; }
+
+.no-padding {
+  padding: 0px; }
+
+.event-text-padding {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  align-self: center; }
+
+.event-chevron {
+  align-self: center; }
+
 /*# sourceMappingURL=style.css.map */
